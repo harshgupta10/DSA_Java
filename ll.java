@@ -67,7 +67,7 @@ public class ll {
         secondlast.next=null;
     }
     //size
-    
+
     public int getSize(){
         return size;
     }
@@ -84,6 +84,16 @@ public class ll {
             System.out.print("NULL");
         
     }
+    //search
+
+    public boolean search(int key){
+        Node currNode = head;
+        while(currNode!=null){
+            if(currNode.data==key)return true;
+            currNode=currNode.next;
+        }
+        return false;
+    }
 
     public static void main(String args[]){
         ll list = new ll();
@@ -95,9 +105,12 @@ public class ll {
         list.addLast(4);
 
         // list.deleteFirst();
-        list.deleteLast();
+        // list.deleteLast();
+
+
 
         list.printNode();
         System.out.println("\n"+list.getSize());
+        System.out.println(list.search(4));
     }
 }
