@@ -18,10 +18,7 @@ class Solution {
             
         }
         
-        if(count/2!=0)count=(count/2)+1;
-        else count=((int)count/2) +1;
-        
-        // System.out.println(count);
+        count=(count/2)+1;        
         
         ListNode node2 = head;
         while(node2!=null){
