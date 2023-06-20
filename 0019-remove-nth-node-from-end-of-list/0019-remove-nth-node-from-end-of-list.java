@@ -19,7 +19,6 @@ class Solution {
             ++size;
             node1=node1.next;
         }
-        System.out.println(size);
         
         
         int position=size-n;
