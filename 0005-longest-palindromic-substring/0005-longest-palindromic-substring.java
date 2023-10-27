@@ -1,33 +1,26 @@
-public class Solution {
+class Solution {
     public String longestPalindrome(String s) {
-        int n = s.length();
-        boolean[][] dp = new boolean[n][n];
-        String ans = "";
-        int maxLength = 0;
-
-        // Base case: all substrings of length 1 are palindromes
-        for (int i = 0; i < n; i++) {
-            dp[i][i] = true;
-            ans = s.substring(i, i+1);
-            maxLength = 1;
+    if (s == null || s.length() < 1) return "";
+    int start = 0, end = 0;
+    for (int i = 0; i < s.length(); i++) {
+        int len1 = expandAroundCenter(s, i, i);
+        int len2 = expandAroundCenter(s, i, i + 1);
+        int len = Math.max(len1, len2);
+        if (len > end - start) {
+            start = i - (len - 1) / 2;
+            end = i + len / 2;
         }
-
-        // Fill in the dp table for substrings of length 2 and greater
-        for (int len = 2; len <= n; len++) {
-            for (int i = 0; i < n-len+1; i++) {
-                int j = i+len-1;
-                if (s.charAt(i) == s.charAt(j)) {
-                    if (len == 2 || dp[i+1][j-1]) {
-                        dp[i][j] = true;
-                        if (len > maxLength) {
-                            ans = s.substring(i, i+len);
-                            maxLength = len;
-                        }
-                    }
-                }
-            }
-        }
-
-        return ans;
     }
+    return s.substring(start, end + 1);
+}
+
+private int expandAroundCenter(String s, int left, int right) {
+    int L = left, R = right;
+    while (L >= 0 && R < s.length() && s.charAt(L) == s.charAt(R)) {
+        L--;
+        R++;
+    }
+    return R - L - 1;
+}
+
 }
